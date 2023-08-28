@@ -1,7 +1,0 @@
-{
-    "server": "https://localhost/macarte-api/",
-    "viewer": "https://ignf.gitlab.io/macarte/mcviewer/?map=$ID&$NOTITLE",
-    "gppKey": "0gd4sx9gxx6ves3hf3hfeyhw",
-    "userProfile": "https://macarte-qualif.ign.fr/utilisateur/$NAME"
-}
-  
