@@ -1,5 +1,5 @@
 {
-  "name": "statistique",
+  "name": "mcstatistic",
   "version": "1.0.0",
   "description": "création des cartes statistiques",
   "main": "index.js",
