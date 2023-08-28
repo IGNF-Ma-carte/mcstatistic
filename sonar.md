@@ -1,1 +1,0 @@
-sonar-scanner.bat -D"sonar.projectKey=macarte-statistic" -D"sonar.sources=." -D"sonar.host.url=https://sonarqube.ign.fr" -D"sonar.login=00d5c6409aaeb0f828f960f2c4f26ceb16099719"
