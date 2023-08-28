@@ -1,0 +1,39 @@
+[data-role="menu-tab"] h3 {
+    margin: 1em 0 1em;
+}
+
+[data-role="menu-tab"] .couleur {
+
+    h1{
+        color:inherit;
+    }
+
+    p > label {
+        min-width: 7em;
+        text-align: right;
+        display: inline-block;
+        margin-right: .5em;
+    }
+    input[type="number"] {
+        width: 5em;
+        text-align: right;
+    }
+    [data-stat="rayon"][data-prop] [data-stat="rmin"] {
+        display: none;
+    }
+    [data-stat="rayon"][data-prop] p > span {
+        display: none;
+    }
+
+
+    .color-brewer {
+        width: 100%;
+    }
+    .cbr-scheme > * {
+        text-align: center;
+    }
+    .cbr-scheme > .custom > * {
+        text-align: left;
+    }
+
+}

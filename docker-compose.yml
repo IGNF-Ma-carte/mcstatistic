@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  web:
+    image: macarte_statistique:latest
+    build: .
+    container_name: macarte_statistique
+    restart: always
+    ports: 
+      - 8087:8080

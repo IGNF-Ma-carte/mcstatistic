@@ -1,0 +1,7 @@
+.ol-ext-dialog.help.large > form {
+  width: 80em;
+  font-size: 1.5rem;
+}
+.ol-ext-dialog.help.large h2 {
+  clear: both;
+}

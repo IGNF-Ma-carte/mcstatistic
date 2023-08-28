@@ -1,0 +1,74 @@
+<h2 data-help="help_visuel">Représentation</h2>
+<div data-stat="brewerColors">
+    <h3 data-help="representation_brewer">Couleurs</h3>
+    <div></div>
+</div>
+
+<div data-stat="symbol">
+    <h3>Symbole</h3>
+    <p>
+        <label>Forme : </label><input type="text">
+    </p>
+</div>
+<div data-stat="rayon">
+    <p>
+        <label>Rayon de : </label><input type="number" value="3" min="1" data-stat="rmin"><span>
+            à
+        </span><input type="number" value="20" min="1" data-stat="rmax"> px
+    </p>
+    <p>
+        <label class="ol-ext-check ol-ext-checkbox">
+            <input type="checkbox">
+            Symbole proportionel<span></span>
+        </label>
+    </p>
+
+</div>
+
+<div data-stat="alpha">
+    <p>
+        <label>Opacité : </label><input type="number" value="100" min="0" max="100">
+    </p>
+</div>
+
+<div data-stat="stroke">
+    <h3>Contours</h3>
+    <p>
+        <label class="ol-ext-check ol-ext-checkbox">
+            <input type="checkbox" checked>
+            Afficher les contours<span></span>
+        </label>
+    </p>
+    <p>
+        <label>Couleur du contour : </label><input type="text">
+    </p>
+</div>
+<div data-stat="blendMode">
+    <p>
+        <label> Mode de superposition : </label>
+        <select>
+            <option value="normal">Normal</option>
+            <option value="multiply">Produit</option>
+        </select>
+    </p>
+</div>
+
+<div data-stat="hradius">
+    <h3>Carte de chaleur</h3>
+    <p>
+        <label>Rayon: </label><input type="number" value="5" min="0" data-stat="hradius">
+    </p>
+    <p>
+        <label>Flou: </label><input type="number" value="15" min="0" data-stat="hblur">
+    </p>
+</div>
+
+<div data-stat="chartType">
+    <h3>Type de graphique</h3>
+    <select>
+        <option value="pie" selected>Camembert</option>
+        <option value="pie3D">Camembert 3D</option>
+        <option value="donut">Donut</option>
+        <option value="bar">Barres</option>
+    </select>
+</div>

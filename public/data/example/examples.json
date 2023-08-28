@@ -1,0 +1,26 @@
+{
+  "Population mondiale": {
+    "file": "population mondiale.geojson",
+    "granularity": "etats"
+  }, 
+  "Tremblement de terre 2015": {
+    "file": "USGS-Earthquake-2015.json",
+    "granularity": "etats"
+  },
+  "Population classe d-age 1975-2022": {
+    "file": "Population par classe d'age 1975-2022.csv",
+    "granularity": "departements"
+  },
+  "Espérance de vie mortalité": {
+    "file": "esperance de vie 2022.csv",
+    "granularity": "departements"
+  },
+  "Population 2022": {
+    "file": "population 2022.csv",
+    "granularity": "departements"
+  },
+  "Evolution annuelle population 1968-2019": {
+    "file": "evol-population-1968-2019.csv",
+    "granularity": "departements"
+  }
+}

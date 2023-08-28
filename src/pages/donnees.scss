@@ -1,0 +1,26 @@
+[data-role="menu-tab"] .donnees {
+  select {
+    width: 100%;
+  }
+
+  [data-stat="nbClass"] input {
+    width: 5em;
+    text-align: right;
+  }
+
+  input:disabled {
+    background-color: #eee;
+  }
+
+  [data-stat="nbClass"] button {
+    display: none;
+  }
+  &[data-mode="c"] [data-stat="nbClass"] button {
+    display: inline;
+  }
+}
+
+[data-statistic="categorie"] [data-role="menu-tab"] .donnees,
+[data-statistic="heatmap"] [data-role="menu-tab"] .donnees {
+  display: none;
+}

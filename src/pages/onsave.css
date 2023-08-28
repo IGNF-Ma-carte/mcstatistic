@@ -1,0 +1,25 @@
+.ol-ext-dialog.onsave form {
+  width: 35em;
+  font-size: 1.2em;
+}
+.ol-ext-dialog.onsave form p:before {
+  content: '\e905';
+  font-family: font-ign;
+  color: #3993f3;
+  font-size: 2em;
+  float: left;
+  margin: .1em .5em;
+  line-height: 1em;
+  font-weight: bold;
+}
+
+.ol-ext-dialog.onsave form .buttons {
+  text-align: center;
+}
+.ol-ext-dialog.onsave form .buttons button {
+  margin: .5em;
+}
+.ol-ext-dialog.onsave form .buttons .button-ghost {
+  display: block;
+  margin: .5em auto;
+}

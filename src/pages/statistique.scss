@@ -1,0 +1,55 @@
+[data-role="menu-tab"] .statistic{
+    select{
+        width: 90%;
+        option:first-child {
+            display: none;
+            color: #aaa;
+        }
+    }
+
+    [data-stat="typeMap"]{
+        margin-bottom: 1.5em;
+        div {
+            display: inline-block;
+            padding: .5em;
+            width: calc(50%);
+            border-bottom: 5px solid transparent;
+            box-sizing: border-box;
+            transition: color .25s ease,background-color .25s ease,border-color .25s ease;
+            color: #788089;
+            &:hover {
+                color: #091625;
+                background-color: #f4f6f8;
+                border-color: #b8bcc1;
+            }
+            &.selected{
+                color: #3993f3;
+                border-color: #3993f3;
+                background-color: #e1eefd;
+            }
+            img {
+                width: 100%;
+            }
+            span{
+                display: block;
+                text-align: center;
+                font-weight: 500;
+            }
+            span:first-letter {
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 1.5rem;
+    }
+    // [data-stat]{
+    //     option:first-child {
+    //         display: none;
+    //         color: #aaa;
+    //     }
+    // }
+
+}

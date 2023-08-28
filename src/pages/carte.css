@@ -1,0 +1,6 @@
+[data-role="map"] .ol-popup.ol-fixed {
+  top: 7em!important;
+}
+.ol-popup .ol-popup-content {
+  max-height: min(300px, calc(100vh - 20em));
+}
