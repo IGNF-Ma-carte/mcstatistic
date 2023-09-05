@@ -57,13 +57,29 @@
       }
     ]
   }, {
+    "title": "2022",
+    "path": "./data/geometry/2022/",
+    "files": [
+      {
+        "title" : "Communes 2022", 
+        "id" : "code INSEE",
+        "file" : "communes.geojsonx" 
+      },{ 
+        "title" : "Communes 2022 (allégé)", 
+        "id" : "code INSEE",
+        "file" : "communes-light.geojsonx",
+        "date": "2022-01-01"
+      }
+    ]
+  },{
     "title": "2021",
     "path": "./data/geometry/2021/",
     "files": [
       {
         "title" : "Communes 2021", 
         "id" : "code INSEE",
-        "file" : "communes.geojsonx" 
+        "file" : "communes.geojsonx",
+        "date": "2021-01-01"
       }
     ]
   }, {
