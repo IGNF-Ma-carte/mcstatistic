@@ -37,8 +37,14 @@ tab.querySelector('[data-stat="rayon"] input[type="checkbox"]').addEventListener
         rmin.value = 1;
         delete tab.querySelector('[data-stat="rayon"]').dataset.prop;
     }
+    propArea.disabled = !e.target.checked;
     calcStatistique({ rmin: parseFloat(rmin.value) });
 });
+const propArea = tab.querySelector('[data-stat="rayon"] select');
+propArea.addEventListener('change', (e) => {
+    calcStatistique({ rProp: e.target.value });
+});
+propArea.disabled = true;
 
 // affichage ou non du contour
 tab.querySelector('[data-stat="stroke"]  input[type="checkbox"]').addEventListener('change', (e) => {
