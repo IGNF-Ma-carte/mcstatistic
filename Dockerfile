@@ -4,7 +4,7 @@ USER root
 RUN rm -rf /usr/share/nginx/html/*
 USER nginx
 
-COPY ./public /usr/share/nginx/html
+COPY ./docs /usr/share/nginx/html
 WORKDIR /usr/share/nginx/html
 
 EXPOSE 8080
