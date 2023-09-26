@@ -20,13 +20,13 @@ tab.querySelector('[data-stat="brewerColors"] div').appendChild(brewer.element);
 // rayon des points
 const rmin = tab.querySelector('input[data-stat="rmin"]')
 rmin.addEventListener('change', (e) => {
-    if (e.target.value < 1) e.target.value = 1;
-    if (e.target.value > rmax) e.target.value = rmax;
+    if (parseFloat(e.target.value) < 1) e.target.value = 1;
+    if (parseFloat(e.target.value) > parseFloat(rmax.value)) e.target.value = rmax.value;
     calcStatistique({ rmin: parseFloat(e.target.value) });
 });
 const rmax = tab.querySelector('input[data-stat="rmax"]')
 rmax.addEventListener('change', (e) => {
-    if (e.target.value < rmin.value) e.target.value = rmin.value;
+    if (parseFloat(e.target.value) < parseFloat(rmin.value)) e.target.value = rmin.value;
     calcStatistique({ rmax: parseFloat(e.target.value) });
 });
 tab.querySelector('[data-stat="rayon"] input[type="checkbox"]').addEventListener('change', (e) => {
