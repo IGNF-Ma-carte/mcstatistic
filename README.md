@@ -1,6 +1,12 @@
 # mcstatistic
 *Macarte statistic app*
 
+![](https://img.shields.io/github/v/release/IGNF-Ma-carte/mcstatistic)
+![](https://img.shields.io/github/stars/IGNF-Ma-carte/mcstatistic)
+![](https://img.shields.io/github/commit-activity/m/IGNF-Ma-carte/mcstatistic)
+![](https://img.shields.io/github/contributors/IGNF-Ma-carte/mcstatistic)
+![](https://img.shields.io/github/license/IGNF-Ma-carte/mcstatistic)
+
 Outil de création de carte statistique et thématique pour  Ma carte.
 
 ## Installation et développement
