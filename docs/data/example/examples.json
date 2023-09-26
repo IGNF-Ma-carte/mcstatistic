@@ -8,7 +8,7 @@
     "granularity": "etats"
   },
   "Population classe d-age 1975-2022": {
-    "file": "Population par classe d'age 1975-2022.csv",
+    "file": "Population classe d-age 1975-2022.csv",
     "granularity": "departements"
   },
   "Espérance de vie mortalité": {
