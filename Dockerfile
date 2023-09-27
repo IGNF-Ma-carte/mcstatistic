@@ -1,10 +1,14 @@
-FROM nginxinc/nginx-unprivileged:1.24
+ARG registry=docker.io
+FROM ${registry}/library/php:8.1-apache
 
-USER root
-RUN rm -rf /usr/share/nginx/html/*
-USER nginx
+# Configuration de apache
+COPY .docker/apache-vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY .docker/apache-security.conf /etc/apache2/conf-enabled/security.conf
+COPY .docker/apache-ports.conf /etc/apache2/ports.conf
 
-COPY ./docs /usr/share/nginx/html
-WORKDIR /usr/share/nginx/html
+RUN a2enmod rewrite remoteip alias headers
+
+COPY --chown=www-data:www-data ./docs /opt/mcstatistic/
+WORKDIR /opt/mcstatistic
 
 EXPOSE 8080
