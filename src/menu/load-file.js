@@ -169,6 +169,8 @@ loadFileElt.querySelectorAll('[data-page="params"] input[data-param]').forEach( 
                 papaOptions.header = input.checked;
                 break
             case 'skipLines':
+                papaOptions.skipLines = parseInt(input.value);
+                break;
             case 'comments':
             case 'delimiter':
                 papaOptions[param] = input.value;
