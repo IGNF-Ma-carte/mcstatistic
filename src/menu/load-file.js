@@ -7,6 +7,7 @@ import dialog from 'mcutils/dialog/dialog';
 import notification from 'mcutils/dialog/notification';
 import element from 'ol-ext/util/element';
 import CSVPreview from 'mcutils/control/CSVPreview';
+import FileSaver from 'file-saver'
 
 import Point from 'ol/geom/Point'
 import Feature from 'ol/Feature'
@@ -221,6 +222,20 @@ loadFileElt.querySelector('select[data-param="attr-lon"]').addEventListener('cha
 loadFileElt.querySelector('select[data-param="attr-lat"]').addEventListener('change', (e) => {
     updateLonlatInput(e.target);
 });
+
+// Granularity download
+loadFileElt.querySelector('.download').addEventListener('click', () => {
+    const granularity = granularitySelector.value.split('/').pop().replace(/\..*$/, '');
+    if (granularity !== 'lonlat') {
+        fetch(granularitySelector.value)
+        .then(res => res.json())
+        .then(geojson => {
+            // Save in a file
+            var blob = new Blob([JSON.stringify(geojson, null, ' ')], {type: "text/plain;charset=utf-8"});
+            FileSaver.saveAs(blob, granularity + '.geojson');
+        })
+    }
+})
 
 // Handle lonlat
 granularitySelector.addEventListener('change', () => {

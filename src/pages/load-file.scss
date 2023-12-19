@@ -143,6 +143,7 @@
         }
 
         .maillage .lonlat,
+        .maillage[data-lonlat="1"] a.download,
         .maillage[data-lonlat="1"] .id {
             display: none;
         }
@@ -162,6 +163,16 @@
         .maillage select {
             margin: .25em 0;
             vertical-align: middle;
+        }
+        label {
+            display: block;
+        }
+        .maillage select[data-param="granularity"] {
+            display:inline-block;
+            margin-right: 1em;
+        }
+        .maillage a.download:after {
+            display: none;
         }
     }
 }
