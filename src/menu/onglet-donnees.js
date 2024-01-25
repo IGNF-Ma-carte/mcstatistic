@@ -3,9 +3,10 @@ import 'mcutils/font/loadFonts';
 import Statistic from 'mcutils/layer/Statistic';
 import element from 'ol-ext/util/element';
 
-import content from '../pages/donnees.html';
-import '../pages/donnees.scss';
 import layer, { brewer, calcStatistique, graph } from "../map/layer";
+
+import content from '../pages/donnees-page.html';
+import '../pages/donnees.scss';
 
 const tab = charte.addMenuTab('donnees', 'fi-table', 'Classes', content);
 tab.querySelector('[data-stat="limits"] div').appendChild(graph.element);

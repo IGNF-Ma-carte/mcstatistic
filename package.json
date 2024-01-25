@@ -1,31 +1,28 @@
 {
   "name": "mcstatistic",
-  "version": "4.1.6",
+  "version": "4.2.0",
   "description": "création des cartes statistiques",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel ./index.html --out-dir ./.dist",
-    "build": "parcel build ./index.html --no-source-maps --public-url . --out-dir ./docs",
+    "start": "parcel ./index.html --dist-dir ./.dist",
+    "build": "parcel build ./index.html --no-source-maps --public-url . --dist-dir ./docs",
     "lint": "eslint --fix ./src/**/*.js --ignore-path .lintignore || exit 0"
   },
   "devDependencies": {
-    "babel-plugin-transform-html-import-to-string": "^2.0.0",
-    "eslint": "^7.32.0",
-    "parcel-bundler": "^1.12.5",
-    "parcel-plugin-clean-dist": "0.0.6",
-    "parcel-plugin-static-files-copy": "^2.6.0",
-    "parcel-plugin-txt": "^1.0.3",
-    "sass": "^1.52.3"
+    "@parcel/transformer-inline-string": "^2.11.0",
+    "@parcel/transformer-sass": "^2.11.0",
+    "buffer": "^6.0.3",
+    "eslint": "^8.21.0",
+    "parcel": "^2.11.0",
+    "parcel-reporter-static-files-copy": "^1.5.3",
+    "process": "^0.11.10"
   },
   "staticFiles": {
-    "staticPath": [
-      "./assets"
-    ],
+    "staticPath": "./assets",
     "watcherGlob": "**"
   },
   "dependencies": {
-    "mcutils": "github:IGNF-Ma-carte/mcutils#1.0.4",
+    "mcutils": "github:IGNF-Ma-carte/mcutils",
     "xlsx": "^0.18.5"
   },
   "repository": {

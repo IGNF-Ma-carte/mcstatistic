@@ -10,12 +10,12 @@ import FileSaver from 'file-saver'
 import { showNewFile, loadFromFile } from'./load-file.js';
 import carte from '../map/carte.js';
 import layer from '../map/layer.js';
+import serviceURL, { getEditorURL } from "mcutils/api/serviceURL.js";
 
 import '../pages/menu.scss';
 
-import onsaveHTML from '../pages/onsave.html'
+import onsaveHTML from '../pages/onsave-page.html'
 import '../pages/onsave.css'
-import serviceURL, { getEditorURL } from "mcutils/api/serviceURL.js";
 
 charte.addTool('save', 'fi-download', 'Télécharger les données', () => {
   if (isValid(layer)) {

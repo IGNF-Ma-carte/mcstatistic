@@ -15,7 +15,7 @@ import Feature from 'ol/Feature'
 import carte, { popup } from '../map/carte';
 import layer, { calcStatistique } from "../map/layer";
 
-import loadFileContent from '../pages/load-file.html';
+import loadFileContent from '../pages/load-file-page.html';
 import '../pages/load-file.scss';
 
 let papaOptions = {

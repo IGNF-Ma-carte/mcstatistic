@@ -1,7 +1,8 @@
 import charte from "mcutils/charte/macarte";
 import carte from "../map/carte";
 import layer from "../map/layer";
-import content from '../pages/legende.html';
+
+import content from '../pages/legende-page.html';
 import '../pages/legende.scss';
 
 const tab = charte.addMenuTab('legende', 'fi-legend', 'Légende', content);

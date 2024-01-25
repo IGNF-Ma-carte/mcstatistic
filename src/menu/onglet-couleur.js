@@ -4,9 +4,10 @@ import PopupSymbol from 'mcutils/input/PopupSymbol';
 import ColorInput from 'ol-ext/util/input/Color';
 import Slider from 'ol-ext/util/input/Slider';
 
-import content from '../pages/couleur.html';
-import '../pages/couleur.scss';
 import layer, { brewer, calcStatistique } from "../map/layer";
+
+import content from '../pages/couleur-page.html';
+import '../pages/couleur.scss';
 
 const tab = charte.addMenuTab('couleur', 'fi-visible', 'Visuel', content);
 let strokeColor = '#3399CC';

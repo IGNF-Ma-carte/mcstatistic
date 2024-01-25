@@ -2,9 +2,10 @@ import charte from "mcutils/charte/macarte";
 import Statistic from 'mcutils/layer/Statistic';
 import element from 'ol-ext/util/element';
 
-import content from '../pages/statistique.html';
-import '../pages/statistique.scss';
 import { calcStatistique } from "../map/layer";
+
+import content from '../pages/statistique-page.html';
+import '../pages/statistique.scss';
 
 const tab = charte.addMenuTab('statistic', 'fi-list', 'Statistique', content);
 
