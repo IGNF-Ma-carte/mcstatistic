@@ -25,17 +25,17 @@
     "watcherGlob": "**"
   },
   "dependencies": {
-    "mcutils": "git+https://github.com/IGNF-Ma-carte/mcutils",
+    "mcutils": "github:IGNF-Ma-carte/mcutils#1.0.4",
     "xlsx": "^0.18.5"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.gpf-tech.ign.fr/cegedim/macarte/statistique.git"
+    "url": "git+https://github.com/IGNF-Ma-carte/mcstatistic.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.gpf-tech.ign.fr/cegedim/macarte/statistique/issues"
+    "url": "https://github.com/IGNF-Ma-carte/mcstatistic/issues"
   },
-  "homepage": "https://gitlab.gpf-tech.ign.fr/cegedim/macarte/statistique#readme"
+  "homepage": "https://github.com/IGNF-Ma-carte/mcstatistic#readme"
 }
