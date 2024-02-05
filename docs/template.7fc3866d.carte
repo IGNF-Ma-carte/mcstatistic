@@ -1,0 +1,119 @@
+{
+ "param": {
+  "lon": 0.8045024092705498,
+  "lat": 46.52962939201606,
+  "zoom": 5.686475884760972,
+  "rot": 0,
+  "controlParams": {
+   "zoomBtn": true,
+   "scaleLine": true,
+   "pSearchBar": true,
+   "legend": true,
+   "coords": false,
+   "selectLayer": true,
+   "geoloc": false,
+   "profil": false,
+   "printDlg": false
+  },
+  "proj": {
+   "valeur": "EPSG:4326"
+  }
+ },
+ "legende": {
+  "legendtitle": "Ma légende",
+  "lineHeight": 32,
+  "legendWidth": 300,
+  "legendVisible": true,
+  "legendParam": {
+   "width": 300,
+   "lineHeight": 32
+  },
+  "legendPos": "bottom-left",
+  "legend": []
+ },
+ "layers": [
+  {
+   "id": 1,
+   "type": "Geoportail",
+   "name": "Plan IGN",
+   "title": "Plan IGN",
+   "visibility": false,
+   "opacity": 1,
+   "description": "Cartographie multi-échelles sur le territoire national, issue des bases de données vecteur de l’IGN, mis à jour régulièrement et réalisée selon un processus entièrement automatisé. Version actuellement en beta test",
+   "copyright": "",
+   "grayscale": false,
+   "blendMode": "",
+   "minZoom": null,
+   "maxZoom": null,
+   "layer": "GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2"
+  },
+  {
+   "id": 2,
+   "type": "Geoportail",
+   "name": "Plan IGN niveaux de gris",
+   "title": "Plan IGN niveaux de gris",
+   "visibility": true,
+   "opacity": 1,
+   "description": "Cartographie multi-échelles sur le territoire national, issue des bases de données vecteur de l’IGN, mis à jour régulièrement et réalisée selon un processus entièrement automatisé. Version actuellement en beta test",
+   "copyright": "",
+   "grayscale": true,
+   "blendMode": "",
+   "minZoom": null,
+   "maxZoom": null,
+   "layer": "GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2"
+  },
+  {
+   "id": 3,
+   "type": "Geoportail",
+   "name": "Photographies aériennes",
+   "title": "Photographies aériennes",
+   "visibility": false,
+   "opacity": 1,
+   "description": "Photographies aériennes",
+   "copyright": "",
+   "grayscale": false,
+   "blendMode": "",
+   "minZoom": null,
+   "maxZoom": null,
+   "layer": "ORTHOIMAGERY.ORTHOPHOTOS"
+  },
+  {
+   "id": 4,
+   "type": "Geoportail",
+   "name": "Routes",
+   "title": "Routes",
+   "visibility": false,
+   "opacity": 1,
+   "description": "Affichage du réseau routier français et européen.",
+   "copyright": "",
+   "grayscale": false,
+   "blendMode": "",
+   "minZoom": null,
+   "maxZoom": null,
+   "extent": [
+    -7121014.540312425,
+    -2451224.6036304585,
+    6229930.402982423,
+    11605001.160023345
+   ],
+   "layer": "TRANSPORTNETWORKS.ROADS"
+  },
+  {
+   "title": "Limite administratives",
+   "url": "https://wxs.ign.fr/static/vectorTiles/styles/BDTOPO/classique.json",
+   "id": 7,
+   "type": "MVT",
+   "name": "",
+   "visibility": false,
+   "opacity": 1,
+   "copyright": "IGN-Geoservice",
+   "selectable": false,
+   "popupContent": {},
+   "grayscale": true,
+   "blendMode": "",
+   "minZoom": null,
+   "maxZoom": null
+  }
+ ],
+ "symbolLib": []
+}
