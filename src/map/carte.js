@@ -2,13 +2,14 @@ import Carte from 'mcutils/Carte';
 import charte from 'mcutils/charte/macarte';
 import PopupFeature from 'ol-ext/overlay/PopupFeature';
 
+import template from './template.carte'
 import '../pages/carte.css'
 
 const carte = new Carte({
-    url: './data/default.carte', //ajout des fonds
-    // key: config.gppKey,
     target: charte.getAppElement()
 });
+
+carte.read(template)
 
 const popup = new PopupFeature({
     canFix: true,
