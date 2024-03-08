@@ -33,7 +33,10 @@ let csvParsed = null;
 const fileAttrId = {}
 
 // Init content / preview
-const loadFileElt = document.getElementById('load-file');
+const loadFileElt = element.create('DIV', {
+    id: 'load-file'
+});
+document.body.prepend(loadFileElt);
 loadFileElt.innerHTML = loadFileContent;
 charte.initAccordion(loadFileElt.querySelector('[data-page="params"] .accordion'));
 const csvPreview = new CSVPreview({
