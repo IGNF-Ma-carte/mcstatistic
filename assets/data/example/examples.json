@@ -1,11 +1,9 @@
 {
   "Population mondiale": {
-    "file": "population mondiale.geojson",
-    "granularity": "etats"
+    "file": "population mondiale.geojson"
   }, 
   "Tremblement de terre 2015": {
-    "file": "USGS-Earthquake-2015.json",
-    "granularity": "etats"
+    "file": "USGS-Earthquake-2015.json"
   },
   "Population classe d-age 1975-2022": {
     "file": "Population classe d-age 1975-2022.csv",
