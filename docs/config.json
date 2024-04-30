@@ -4,7 +4,6 @@
   "viewer": "https://ignf.gitlab.io/macarte/mcviewer/?map=$ID&$NOTITLE",
   "editor": "https://qlf-macarte.ign.fr/edition/$TYPE/$ID",
   "userProfile": "https://qlf-macarte.ign.fr/utilisateur/$NAME",
-  "sitePiwik": 239,
   "gppKey": "0gd4sx9gxx6ves3hf3hfeyhw",
   "edugeoKey": "1mgehldv90vifl6s5ksf900i"
 }

@@ -1,6 +1,6 @@
 {
   "name": "mcstatistic",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "description": "création des cartes statistiques",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
