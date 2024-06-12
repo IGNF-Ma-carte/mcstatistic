@@ -3,6 +3,7 @@ import papa from 'papaparse';
 import { read, utils } from "xlsx";
 import GeoJSON from 'ol/format/GeoJSON';
 import GeoJSONX from 'ol-ext/format/GeoJSONX';
+import SourceWFS from 'ol-ext/source/TileWFS'
 import dialog from 'mcutils/dialog/dialog';
 import notification from 'mcutils/dialog/notification';
 import element from 'ol-ext/util/element';
@@ -49,7 +50,7 @@ const csvPreview = new CSVPreview({
  */
 getGeometryChoices();
 const fileInput = loadFileElt.querySelector('input[type="file"]');
-fileInput.addEventListener('change', (e) => {
+fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
     if (!file) {
         return;
@@ -72,7 +73,7 @@ fileInput.addEventListener('change', (e) => {
             case 'geojson':{
                 const data = validateJSON(result);
                 if(!data){
-                    dialog.showAlert("Le fichier n'est pas un fihcier JSON valide");
+                    dialog.showAlert("Le fichier n'est pas un fichier JSON valide");
                     return;
                 }
                 loadDataInMap(data);
@@ -581,6 +582,51 @@ function showFeatures(features){
     }
 }
 
+/** Test with WFS layer
+ */
+function loadWFS(){
+    hideLoadFile()
+    charte.showTab('statistic', true); 
+
+    const tileZoom = 12
+    const source = new SourceWFS({
+        url: 'https://data.geopf.fr/wfs/ows',
+        typeName: 'BDTOPO_V3:commune',
+        tileZoom: tileZoom
+    })
+    layer.setMinZoom(tileZoom-2)
+    layer.setSource(source)
+
+    //ajouter la liste des attributs dans l'onglet statistique / choisir l'attribut
+    const select = charte.getMenuTabElement('statistic').querySelector('select[data-stat="cols"]');
+    select.innerHTML = '';
+
+    element.create('OPTION', {
+        value: '',
+        text: 'Sélectionner un attribut',
+        parent: select
+    });
+    calcStatistique({ 'cols' : [] })
+
+    function onload(e) {
+        const features = source.getFeatures();
+        if (features.length) {
+            Object.keys(features[0].getProperties()).forEach(property => {
+                if (property !== features[0].getGeometryName()) {
+                    element.create('OPTION', {
+                        value: property,
+                        text: property,
+                        parent: select
+                    });
+                }
+            });
+            source.un('tileloadend', onload)
+        }
+    }
+    source.on('tileloadend', onload)
+}
+window.loadWFS = loadWFS
+window.layer = layer
 
 function hideLoadFile(){
     loadFileElt.classList.add('hide');
