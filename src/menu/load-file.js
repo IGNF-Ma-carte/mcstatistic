@@ -82,8 +82,10 @@ fileInput.addEventListener('change', () => {
                 }
                 break;
             }
+            case 'ods':
             case 'xls':
             case 'xlsx': {
+                console.log('read', extension)
                 const workbook = read(result, { type: 'binary' });
                 console.log(workbook);
                 result = utils.sheet_to_csv(workbook.Sheets[workbook.SheetNames[0]]);
@@ -106,7 +108,7 @@ fileInput.addEventListener('change', () => {
     dialog.showWait('Chargement en cours...')
     setTimeout(()=> {
         // Start loading
-        if (/^xls/.test(extension)) {
+        if (/^xlsx?$|^ods$/.test(extension)) {
             reader.readAsBinaryString(file);
         } else {
             reader.readAsText(file);
