@@ -7,12 +7,12 @@
         "title" : "Communes", 
         "id" : "code INSEE",
         "file" : "communes.geojsonx",
-        "date": "2023-01-01"
+        "date": "2024-01-01"
       }, { 
         "title" : "Communes (allégé)", 
         "id" : "code INSEE",
         "file" : "communes-light.geojsonx",
-        "date": "2023-01-01"
+        "date": "2024-01-01"
       }, {
         "title" : "Départements", 
         "id" : "numéro de département",
@@ -21,12 +21,12 @@
         "title" : "EPCI", 
         "id" : "code EPCI",
         "file" : "epci.geojsonx", 
-        "date": "2022-10-17"
+        "date": "2024-01-01"
       },{ 
         "title" : "EPCI (allégé)", 
         "id" : "code EPCI",
         "file" : "epci-light.geojsonx", 
-        "date": "2022-10-17"
+        "date": "2024-01-01"
       },{ 
         "title" : "Bassin de vie (INSEE)", 
         "id" : "id",
@@ -57,18 +57,45 @@
       }
     ]
   }, {
+    "title": "2023",
+    "path": "./data/geometry/2023/",
+    "files": [
+      {
+        "title" : "Communes 2023", 
+        "id" : "code INSEE",
+        "file" : "communes.geojsonx",
+        "date": "2023-01-01"
+      },{ 
+        "title" : "Communes 2023 (allégé)", 
+        "id" : "code INSEE",
+        "file" : "communes-light.geojsonx",
+        "date": "2023-01-01"
+      }
+    ]
+  },{
     "title": "2022",
     "path": "./data/geometry/2022/",
     "files": [
       {
         "title" : "Communes 2022", 
         "id" : "code INSEE",
-        "file" : "communes.geojsonx" 
+        "file" : "communes.geojsonx", 
+        "date": "2022-01-01"
       },{ 
         "title" : "Communes 2022 (allégé)", 
         "id" : "code INSEE",
         "file" : "communes-light.geojsonx",
         "date": "2022-01-01"
+      },{ 
+        "title" : "EPCI", 
+        "id" : "code EPCI",
+        "file" : "epci.geojsonx", 
+        "date": "2022-10-17"
+      },{ 
+        "title" : "EPCI (allégé)", 
+        "id" : "code EPCI",
+        "file" : "epci-light.geojsonx", 
+        "date": "2022-10-17"
       }
     ]
   },{
