@@ -563,14 +563,22 @@ function showFeatures(features){
     //ajouter la liste des attributs dans l'onglet statistique / choisir l'attribut
     const select = charte.getMenuTabElement('statistic').querySelector('select[data-stat="cols"]');
     select.innerHTML = '';
-
     element.create('OPTION', {
         value: '',
         text: 'Sélectionner un attribut',
         parent: select
     });
-    calcStatistique({ 'cols' : [] })
 
+    //ajouter la liste des attributs dans l'onglet statistique / choisir l'attribut
+    const select2 = charte.getMenuTabElement('couleur').querySelector('[data-stat="col2"] select');
+    select2.innerHTML = '';
+    element.create('OPTION', {
+        value: '',
+        text: 'Attribut par défaut',
+        parent: select2
+    });
+
+    // Fill attributes
     if (features.length) {
         Object.keys(features[0].getProperties()).forEach(property => {
             if (property !== features[0].getGeometryName()) {
@@ -579,9 +587,17 @@ function showFeatures(features){
                     text: property,
                     parent: select
                 });
+                element.create('OPTION', {
+                    value: property,
+                    text: property,
+                    parent: select2
+                });
             }
         });
     }
+
+    // Init stats
+    calcStatistique({ 'cols' : [] })
 }
 
 /** Test with WFS layer

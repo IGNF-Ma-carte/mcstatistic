@@ -18,6 +18,13 @@
         width: 5em;
         text-align: right;
     }
+    [data-stat="col2"] {
+        color: #091625;
+        pointer-events: none;
+    }
+    [data-stat="rayon"][data-prop] [data-stat="col2"] {
+        pointer-events: all;
+    }
     [data-stat="rayon"][data-prop] [data-stat="rmin"] {
         display: none;
     }

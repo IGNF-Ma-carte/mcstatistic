@@ -38,7 +38,7 @@ tab.querySelector('[data-stat="rayon"] input[type="checkbox"]').addEventListener
         rmin.value = 1;
         delete tab.querySelector('[data-stat="rayon"]').dataset.prop;
     }
-    propArea.disabled = !e.target.checked;
+    propAttr.disabled = propArea.disabled = !e.target.checked;
     calcStatistique({ rmin: parseFloat(rmin.value) });
 });
 const propArea = tab.querySelector('[data-stat="rayon"] select');
@@ -46,6 +46,13 @@ propArea.addEventListener('change', (e) => {
     calcStatistique({ rProp: e.target.value });
 });
 propArea.disabled = true;
+
+// Attribut codant la taille du symbol
+const propAttr = tab.querySelector('[data-stat="col2"] select')
+propAttr.addEventListener('change', e => {
+    calcStatistique({ col2: e.target.value })
+})
+propAttr.disabled = true;
 
 // affichage ou non du contour
 tab.querySelector('[data-stat="stroke"]  input[type="checkbox"]').addEventListener('change', (e) => {
@@ -92,7 +99,6 @@ const popupSymbol = new PopupSymbol({
 popupSymbol.on('select', (e) => {
     calcStatistique({ symbol: e.value });
 })
-
 
 // Opacité
 let alpha = new Slider({
