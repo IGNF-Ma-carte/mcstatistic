@@ -2,7 +2,6 @@
 import './mcversion'
 import './i18n';
 import charte from  'mcutils/charte/macarte';
-import _T from 'mcutils/i18n/i18n';
 
 import carte from './map/carte'
 import slayer from './map/layer'

@@ -11,7 +11,7 @@ import carte from "./carte"
 // Add brewer
 const brewer = new ColorBrewer({});
 
-brewer.on(['change:scheme', 'check', 'change:color'], (e) => {
+brewer.on(['change:scheme', 'check', 'change:color'], () => {
     calcStatistique({ brewerColors: brewer.getColors()}, 300);
 })
     
@@ -47,7 +47,7 @@ layer.on('stat:end', (e) => {
     // Handle size
     switch (e.stat.typeMap) {
       case 'categorie': {
-        brewer.setSize(slayer.getValues().length);
+        brewer.setSize(layer.getValues().length);
         break;
       }
       case 'sectoriel': {

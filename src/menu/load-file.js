@@ -626,7 +626,7 @@ function loadWFS(){
     });
     calcStatistique({ 'cols' : [] })
 
-    function onload(e) {
+    function onload() {
         const features = source.getFeatures();
         if (features.length) {
             Object.keys(features[0].getProperties()).forEach(property => {

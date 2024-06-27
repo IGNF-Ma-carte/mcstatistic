@@ -1,5 +1,4 @@
 import charte from "mcutils/charte/macarte";
-import _T from "mcutils/i18n/i18n";
 import saveCarte from 'mcutils/dialog/saveCarte';
 import api from 'mcutils/api/api';
 import { connectDialog } from 'mcutils/charte/macarte';

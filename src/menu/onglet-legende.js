@@ -1,13 +1,12 @@
 import charte from "mcutils/charte/macarte";
 import carte from "../map/carte";
-import layer from "../map/layer";
 
 import content from '../pages/legende-page.html';
 import '../pages/legende.scss';
 
 const tab = charte.addMenuTab('legende', 'fi-legend', 'Légende', content);
 
-charte.on('tab:show',(e) => {
+charte.on('tab:show',() => {
     // console.log(e.id+ ' tab is open...');
 })
 
@@ -22,7 +21,7 @@ inputTitle.value = legend.getTitle();
 
 // hauteur de la ligne
 const inputHeight = tab.querySelector('[data-legend="line"]')
-inputHeight.addEventListener('change', (e) => {
+inputHeight.addEventListener('change', () => {
     legend.set('lineHeight', parseInt(inputHeight.value));
 })
 carte.on('read', () => {
