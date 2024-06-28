@@ -34,23 +34,36 @@ charte.addTool('save', 'fi-download', 'Télécharger les données', () => {
     buttons: { submit: 'charger', cancel: 'annuler' },
     onButton: (b, inputs) => {
       if (b==='submit') {
+        const error = [];
+        const stat = layer.getStatistic();
         ['data','style','carte'].forEach(s => {
           if (inputs[s].checked) {
             let data, name, type = 'text/plain'
             switch (s) {
               case 'data': {
                 // Write carte data
-                data = (new GeoJSON).writeFeatures(layer.getSource().getFeatures(),{
-                  featureProjection: carte.getMap().getView().getProjection(),
-                  decimals: 7
-                })
+                if (stat.typeMap === 'symbol') {
+                  const ptLayer = layer.getVectorStyle()
+                  data = (new GeoJSON).writeFeatures(ptLayer.getSource().getFeatures(),{
+                    featureProjection: carte.getMap().getView().getProjection(),
+                    decimals: 7
+                  })
+                } else {
+                  data = (new GeoJSON).writeFeatures(layer.getSource().getFeatures(),{
+                    featureProjection: carte.getMap().getView().getProjection(),
+                    decimals: 7
+                  })
+                }
                 name = 'statistique.geojson'
                 break;
               }
               case 'style': {
-                data = layer.getParametricStyle(null, 'SLD')
+                data = layer.getParametricStyle(stat, 'SLD')
                 type = 'text/xml'
                 name = 'statistique.sld'
+                if (typeof(data) !== 'string') {
+                  error.push('Impossible de calculer un SLD (' + stat.typeMap + ').')
+                }
                 break;
               }
               case 'carte': {
@@ -66,6 +79,9 @@ charte.addTool('save', 'fi-download', 'Télécharger les données', () => {
           }
         })
         dialog.close();
+        if (error.length) {
+          dialog.showAlert(error.join('<\br>'))
+        }
       }
     }
   })
