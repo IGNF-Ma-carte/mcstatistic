@@ -23,3 +23,9 @@
   display: block;
   margin: .5em auto;
 }
+
+.ol-ext-dialog.export label {
+  display: block;
+  margin: .5em 0;
+  min-width: 20em;
+}

@@ -5,6 +5,8 @@ import { connectDialog } from 'mcutils/charte/macarte';
 import { transformExtent } from 'ol/proj';
 import dialog from "mcutils/dialog/dialog";
 import FileSaver from 'file-saver'
+import GeoJSON from 'ol/format/GeoJSON';
+import ol_ext_element from 'ol-ext/util/element'
 
 import { showNewFile, loadFromFile } from'./load-file.js';
 import carte from '../map/carte.js';
@@ -16,15 +18,57 @@ import '../pages/menu.scss';
 import onsaveHTML from '../pages/onsave-page.html'
 import '../pages/onsave.css'
 
-charte.addTool('save', 'fi-download', 'Télécharger les données', () => {
-  if (isValid(layer)) {
-    // Write carte data
-    const data = carte.write();
+const content = `
+<label class="ol-ext-check ol-ext-checkbox"><input class="data" type="checkbox" /><span></span> les données (GeoJSON) </label>
+<label class="ol-ext-check ol-ext-checkbox"><input class="style" type="checkbox" /><span></span> un fichier de style (SLD) </label>
+<label class="ol-ext-check ol-ext-checkbox"><input class="carte" type="checkbox" /><span></span> la carte complète </label>
+`;
 
-    // Save in a file
-    var blob = new Blob([JSON.stringify(data, null, ' ')], {type: "text/plain;charset=utf-8"});
-    FileSaver.saveAs(blob, "statistique.carte");
-  }
+charte.addTool('save', 'fi-download', 'Télécharger les données', () => {
+  if (!isValid(layer)) return;
+
+  dialog.show({
+    title: 'Télécharger',
+    content: content,
+    className: 'export',
+    buttons: { submit: 'charger', cancel: 'annuler' },
+    onButton: (b, inputs) => {
+      if (b==='submit') {
+        ['data','style','carte'].forEach(s => {
+          if (inputs[s].checked) {
+            let data, name, type = 'text/plain'
+            switch (s) {
+              case 'data': {
+                // Write carte data
+                data = (new GeoJSON).writeFeatures(layer.getSource().getFeatures(),{
+                  featureProjection: carte.getMap().getView().getProjection(),
+                  decimals: 7
+                })
+                name = 'statistique.geojson'
+                break;
+              }
+              case 'style': {
+                data = layer.getParametricStyle(null, 'SLD')
+                type = 'text/xml'
+                name = 'statistique.sld'
+                break;
+              }
+              case 'carte': {
+                data = carte.write();
+                data = JSON.stringify(data, null, ' ');
+                name = 'statistique.carte'
+                break;
+              }
+            }
+            // Save in a file
+            var blob = new Blob([data], {type: type+';charset=utf-8'});
+            FileSaver.saveAs(blob, name);
+          }
+        })
+        dialog.close();
+      }
+    }
+  })
 })
 
 // Save button

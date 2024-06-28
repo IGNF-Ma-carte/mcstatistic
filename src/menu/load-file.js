@@ -21,6 +21,7 @@ import '../pages/load-file.scss';
 
 let papaOptions = {
     skipEmptyLines: true,
+    dynamicTyping: true,
     header: true,
 };
 const errorStr = {
