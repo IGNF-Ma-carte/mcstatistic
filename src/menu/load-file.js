@@ -244,12 +244,17 @@ loadFileElt.querySelector('select[data-param="attr-lat"]').addEventListener('cha
 loadFileElt.querySelector('.download').addEventListener('click', () => {
     const granularity = granularitySelector.value.split('/').pop().replace(/\..*$/, '');
     if (granularity !== 'lonlat' && granularity !== 'custom') {
+        dialog.showWait('Enregistrement en cours...')
         fetch(granularitySelector.value)
         .then(res => res.json())
         .then(geojson => {
+            // Convert to geojson
+            const features = (new GeoJSONX).readFeatures(geojson)
+            geojson = (new GeoJSON).writeFeatures(features)
             // Save in a file
-            var blob = new Blob([JSON.stringify(geojson, null, ' ')], {type: "text/plain;charset=utf-8"});
+            const blob = new Blob([geojson], {type: "text/plain;charset=utf-8"});
             FileSaver.saveAs(blob, granularity + '.geojson');
+            dialog.close();
         })
     }
 })
