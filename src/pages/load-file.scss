@@ -171,8 +171,15 @@
             display:inline-block;
             margin-right: 1em;
         }
-        .maillage a.download:after {
-            display: none;
+        .maillage .loadGranularity {
+            float: right;
+            margin-top: -.5em;
+            a {
+                margin: 0 0 0 1em;
+            }
+            a:after {
+                display: none;
+            }
         }
     }
 }

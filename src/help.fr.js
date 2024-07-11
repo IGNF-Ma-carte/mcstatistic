@@ -36,7 +36,7 @@ Pour cela, elle s'appuiera sur des analyses statistiques qui lui fourniront, par
 
 ## Positionnement et géométrie
 Afin de représenter un phénomène sur une carte, il est nécessaire d'avoir sa position dans l'espace.
-Cette position peut être intégrée dans le fichier (GeoJSON) ou liée à un découpage existant (pays, département, commune, ...). Dans ce cas, il faudra préciser lors de l'import des données le type de découpage utilisé et l'attibut servant à coder le lien.
+Cette position peut être intégrée dans le fichier (GeoJSON) ou liée à un maillage existant (pays, département, commune, ...). Dans ce cas, il faudra préciser lors de l'import des données le type de maillage utilisé et l'attibut servant à coder le lien.
 Pour les départements, le lien se fait sur le numéro de département (01 = département de l'Ain), pour les communes il s'agit du code INSEE de la commune (01001 = commune de L'Abergement-Clémenciat), pour les pays, on utilise le code ISO (fr = France).
 
 Lorsqu'on n'a pas de coordonnées associées à une série de données, mais qu'on a des informations de localisation à l'adresse, à la commune ou au lieu-dit, on peut utiliser des outils de [géocodage](` + serviceURL.geocod + `) pour en déduire des coordonnées.
@@ -49,6 +49,8 @@ Dans ce cas, il faudra préciser lors de l'import des données le type de décou
 * pour les départements, le lien se fait sur le numéro de département (01 = département de l'Ain), 
 * pour les communes il s'agit du code INSEE de la commune (01001 = commune de L'Abergement-Clémenciat), 
 * pour les pays, on utilise le code ISO (fr = France).
+
+Vous pouvez utiliser votre propre fichier de maillage (:fi-share: importer un maillage). Dans ce cas, vous devez préciser l'attribut qui servira de clé pour retrouvé la maille au sein de vos données.
 
 Lorsqu'on n'a pas de coordonnées associées à une série de données, mais qu'on a des informations de localisation à l'adresse, à la commune ou au lieu-dit, on peut utiliser des [outils de géocodage](https://macarte.ign.fr/geocod/) pour en déduire des coordonnées.
 

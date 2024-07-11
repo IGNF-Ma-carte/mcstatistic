@@ -76,9 +76,12 @@
             <input type="radio" name="accordion-3">
             <label onclick="accordionCheck(this)" data-help="intro_maillage">Maillage</label>
             <div>
+                <div class="loadGranularity">
+                    <a class="upload article button"><i class="fi-share"></i> importer un maillage</a>
+                    <a class="download article button"><i class="fi-download"></i> enregistrer le maillage</a>
+                </div>
                 <label>Données définies sur :</label>
                 <select data-param="granularity"></select>
-                <a class="download article button"><i class="fi-download"></i> enregistrer les données du maillage</a>
                 <div class="lonlat">
                     <label>longitude : </label><select data-param="attr-lon"></select>
                     <br/>

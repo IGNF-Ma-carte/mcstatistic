@@ -9,6 +9,7 @@ import notification from 'mcutils/dialog/notification';
 import element from 'ol-ext/util/element';
 import CSVPreview from 'mcutils/control/CSVPreview';
 import FileSaver from 'file-saver'
+import ol_format_Guesser from 'mcutils/format/Guesser';
 
 import Point from 'ol/geom/Point'
 import Feature from 'ol/Feature'
@@ -18,6 +19,9 @@ import layer, { calcStatistique } from "../map/layer";
 
 import loadFileContent from '../pages/load-file-page.html';
 import '../pages/load-file.scss';
+import uploadDialog from '../pages/upload-granulary-dialog.html'
+import '../pages/upload-granulary.scss';
+
 
 let papaOptions = {
     skipEmptyLines: true,
@@ -30,6 +34,13 @@ const errorStr = {
     empty: 'ligne vide'
 }
 let csvParsed = null;
+
+// Custom granularity file
+const customFile = {
+    features: [],
+    name: '',
+    id: ''
+}
 
 // File / attribute id match
 const fileAttrId = {}
@@ -86,7 +97,6 @@ fileInput.addEventListener('change', () => {
             case 'ods':
             case 'xls':
             case 'xlsx': {
-                console.log('read', extension)
                 const workbook = read(result, { type: 'binary' });
                 console.log(workbook);
                 result = utils.sheet_to_csv(workbook.Sheets[workbook.SheetNames[0]]);
@@ -233,7 +243,7 @@ loadFileElt.querySelector('select[data-param="attr-lat"]').addEventListener('cha
 // Granularity download
 loadFileElt.querySelector('.download').addEventListener('click', () => {
     const granularity = granularitySelector.value.split('/').pop().replace(/\..*$/, '');
-    if (granularity !== 'lonlat') {
+    if (granularity !== 'lonlat' && granularity !== 'custom') {
         fetch(granularitySelector.value)
         .then(res => res.json())
         .then(geojson => {
@@ -243,6 +253,80 @@ loadFileElt.querySelector('.download').addEventListener('click', () => {
         })
     }
 })
+
+// Granularity upload
+loadFileElt.querySelector('.loadGranularity .upload').addEventListener('click', () => {
+    let file;
+    dialog.show({
+        content: uploadDialog,
+        className: 'loadGranularity',
+        buttons: { submit: 'ok', cancel: 'annuler' },
+        onButton: (b, inputs) => {
+            if (b!=='submit') return;
+            dialog.close();
+            // Remove last file
+            const firstOption = granularitySelector.querySelector('OPTION')
+            if (firstOption.value === 'custom') firstOption.remove();
+            console.log([firstOption])
+            // New custom options
+            let name = file.name.split('.')
+            if (name.length > 1) name.pop();
+            customFile.name = name.join('.').replace(/(^|\s|-|_)([a-z])/g, m => m.toUpperCase())
+            granularitySelector.prepend(element.create('OPTION', {
+                text: customFile.name,
+                value: 'custom'
+            }))
+            customFile.id = inputs.grid.value;
+            granularitySelector.value = 'custom';
+            element.dispatchEvent('change', granularitySelector)
+        }
+    })
+    const selectInput = dialog.element.querySelector('select')
+    // Drag enter
+    element.addListener(dialog.getContentElement().querySelector('input[type="file"]'), ['dragenter','dragleave'], e => {
+        dialog.getContentElement().dataset.drag = e.type;
+    })
+    // Change file
+    dialog.getContentElement().querySelector('input.grfile').addEventListener('change', e => {
+        if (!e.target.files.length) return;
+        // Load file
+        file = e.target.files[0];
+        dialog.getContentElement().dataset.loading = '';
+        const reader = new FileReader
+        // Read file
+        reader.onload = () => {
+            const format = new ol_format_Guesser
+            customFile.features = format.readFeatures(reader.result, {
+                featureProjection: carte.getMap().getView().getProjection()
+            });
+            const feature = customFile.features[0]
+            if (feature) {
+                // Get properties
+                Object.keys(feature.getProperties()).forEach(p => {
+                    if (/string|number/.test(typeof(feature.get(p)))) {
+                        element.create('OPTION', {
+                            text: p,
+                            parent: selectInput
+                        })
+                    }
+                })
+            } else {
+                customFile.features = [];
+            }
+            if (customFile.features.length) {
+                dialog.getContentElement().dataset.ready = ''
+                delete dialog.getContentElement().dataset.error
+            } else {
+                delete dialog.getContentElement().dataset.ready
+                dialog.getContentElement().dataset.error = ''
+            }
+            delete dialog.getContentElement().dataset.loading;
+        }
+        dialog.getContentElement().querySelector('span.filename').innerText = file.name;
+        delete dialog.getContentElement().dataset.drag;
+        reader.readAsText(file)
+    })
+});
 
 // Handle lonlat
 granularitySelector.addEventListener('change', () => {
@@ -263,7 +347,11 @@ granularitySelector.addEventListener('change', () => {
     } else {
         delete loadFileElt.querySelector('.maillage').dataset.lonlat;
         loadFileElt.querySelector('select[data-param="attr-id"]').dispatchEvent(new Event('change'));
-        loadFileElt.querySelector('.maillage .id span').innerText = fileAttrId[granularitySelector.value] || '';
+        if (granularitySelector.value === 'custom') {
+            loadFileElt.querySelector('.maillage .id span').innerText = customFile.id;
+        } else {
+            loadFileElt.querySelector('.maillage .id span').innerText = fileAttrId[granularitySelector.value] || '';
+        }
     }
 })
 
@@ -317,63 +405,72 @@ loadFileElt.querySelectorAll('[data-page="params"] button').forEach( (button) =>
                     // 3-afficher les features
                     // 4-cacher le chargement de fichier
                     const attrId = loadFileElt.querySelector('select[data-param="attr-id"]').value;
+                    let featureId = 'id'
                     dialog.showWait('Recherche des géométries...');
-                    fetch(granularitySelector.value)
-                        .then(res => res.json())
-                        .then(geojson => {
-                            dialog.hide();
-                            const join = joinFeatures(geojson, csvParsed.data, attrId);
-                            const features = join.features;
-                            // No error
-                            if (!join.error.length) {
-                                notification.show(features.length + ' objets chargés')
-                            } else {
-                                const granu = granularitySelector.value.split('/').pop().split('.').shift();
-                                dialog.show({
-                                    title: 'Erreur au chargement',
-                                    content: ['<b>',
-                                        features.length,
-                                        '</b> objets chargés sur <b>',
-                                        csvParsed.data.length,
-                                        '</b><br/>',
-                                        'Certaines lignes du fichier n\'ont pas trouvées de correspondance sur le maillage indiqué...<br/>',
-                                        'Vérifiez que l\'attribut codant (<i>'+attrId+'</i>)',
-                                        'correspond bien au maillage choisi',
-                                        '(<i>' + granu +'</i>)...'
-                                    ].join(' '),
-                                    className: 'alert load',
-                                    buttons: { more: 'plus d\'info...', ok: 'ok' },
-                                    onButton: b => {
-                                        if (b==='more') {
-                                            // Show errors in a dialog
-                                            const ul = element.create('TABLE')
-                                            const cols = Object.keys(join.error[0].data);
-                                            const th = element.create('TR', { parent: ul });
-                                            element.create('TH', { text: 'erreur', parent: th })
+                    if (granularitySelector.value === 'custom') {
+                        featureId = customFile.id
+                        console.log(customFile.features[0])
+                        readFeatures(customFile.features)
+                    } else {
+                        fetch(granularitySelector.value)
+                            .then(res => res.json())
+                            .then(readFeatures)
+                    }
+                    function readFeatures(geojson) {
+                        dialog.hide();
+                        const join = joinFeatures(geojson, csvParsed.data, attrId, featureId);
+                        const features = join.features;
+                        // No error
+                        if (!join.error.length) {
+                            notification.show(features.length + ' objets chargés')
+                        } else {
+                            let granu = granularitySelector.value.split('/').pop().split('.').shift();
+                            if (granu === 'custom') granu = customFile.name;
+                            dialog.show({
+                                title: 'Erreur au chargement',
+                                content: ['<b>',
+                                    features.length,
+                                    '</b> objets chargés sur <b>',
+                                    csvParsed.data.length,
+                                    '</b><br/>',
+                                    'Certaines lignes du fichier n\'ont pas trouvées de correspondance sur le maillage indiqué...<br/>',
+                                    'Vérifiez que l\'attribut codant (<i>'+attrId+'</i>)',
+                                    'correspond bien au maillage choisi',
+                                    '(<i>' + granu +'</i>)...'
+                                ].join(' '),
+                                className: 'alert load',
+                                buttons: { more: 'plus d\'info...', ok: 'ok' },
+                                onButton: b => {
+                                    if (b==='more') {
+                                        // Show errors in a dialog
+                                        const ul = element.create('TABLE')
+                                        const cols = Object.keys(join.error[0].data);
+                                        const th = element.create('TR', { parent: ul });
+                                        element.create('TH', { text: 'erreur', parent: th })
+                                        cols.forEach(c => {
+                                            element.create('TH', { text: c, title: c, parent: th })
+                                        })
+                                        join.error.forEach(e => {
+                                            const tr = element.create('TR', { parent: ul });
+                                            element.create('TD', { text: errorStr[e.error], parent: tr })
                                             cols.forEach(c => {
-                                                element.create('TH', { text: c, title: c, parent: th })
+                                                element.create('TD', { text: e.data[c] || '', className: typeof(e.data[c]), parent: tr })
                                             })
-                                            join.error.forEach(e => {
-                                                const tr = element.create('TR', { parent: ul });
-                                                element.create('TD', { text: errorStr[e.error], parent: tr })
-                                                cols.forEach(c => {
-                                                    element.create('TD', { text: e.data[c] || '', className: typeof(e.data[c]), parent: tr })
-                                                })
-                                            })
-                                            dialog.show({
-                                                title: granu + ' en erreur',
-                                                content: ul,
-                                                className: 'alert loadError',
-                                                buttons: { ok: 'ok' },            
-                                            })            
-                                        }
+                                        })
+                                        dialog.show({
+                                            title: granu + ' en erreur',
+                                            content: ul,
+                                            className: 'alert loadError',
+                                            buttons: { ok: 'ok' },            
+                                        })            
                                     }
-                                })
-                            }
-                            showFeatures(features);
-                            hideLoadFile();
-                            charte.showTab('statistic', true); 
-                        });
+                                }
+                            })
+                        }
+                        showFeatures(features);
+                        hideLoadFile();
+                        charte.showTab('statistic', true); 
+                    };
                 }
                 // Update stat
                 document.querySelector('[data-stat="typeMap"] div img').click()
@@ -479,9 +576,10 @@ function displayAttributesForId(){
  * @param {string} attrId join attribute ID
  * @returns 
  */
-function joinFeatures(geojson, datas, attrId) {
+function joinFeatures(geojson, datas, attrId, featureId) {
+    featureId = featureId || 'id';
     // read features
-    const maillage = (new GeoJSONX()).readFeatures(geojson, {
+    const maillage = Array.isArray(geojson) ? geojson : (new GeoJSONX()).readFeatures(geojson, {
         featureProjection: carte.getMap().getView().getProjection()
     });
     const features = []
@@ -497,7 +595,7 @@ function joinFeatures(geojson, datas, attrId) {
                 data: data,
                 error: 'duplicate'
             })
-        } else if (id === null || id === '') {
+        } else if (id === null || id === '' || id === undefined) {
             // Empty line
             error.push({
                 id: id,
@@ -508,7 +606,7 @@ function joinFeatures(geojson, datas, attrId) {
             for (let i=0; i<maillage.length; i++) {
                 const feature = maillage[i];
                 // join on id
-                if (id == feature.get('id')) {
+                if (id == feature.get(featureId)) {
                     // Remove from maillage
                     maillage.splice(i,1);
                     done[id] = true;
