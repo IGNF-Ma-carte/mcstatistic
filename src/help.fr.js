@@ -31,12 +31,12 @@ La vision fine et la vision globale sont nécessaires pour analyser l'image.
 Ainsi, lorsqu'on représente des forêts ou des bois sur une carte statistique ce ne sont pas simplement les objets en eux même qui sont décrits mais on cherche à faire ressortir des informations concernant, par exemple, les types de boisements, les propriétaires ou gestionnaires, les modes d'exploitation, etc.
 
 ## Thématique et statistique
-La cartographie thématique visualise les données sur la base de concepts spatiaux tels que la densité, les proportions, les pourcentages, les indices ou les tendances, des moyennes... Il est donc nécessaire d'avoir accès à de l'information et à des [données chiffrées](http://seig.ensg.ign.fr/fichchap.php?NOFICHE=FP10&NOCHEM=CHEMS002) concernant la thématique abordée.
+La cartographie thématique visualise les données sur la base de concepts spatiaux tels que la densité, les proportions, les pourcentages, les indices ou les tendances, des moyennes... Il est donc nécessaire d'avoir accès à de l'information et à des données chiffrées concernant la thématique abordée.
 Pour cela, elle s'appuiera sur des analyses statistiques qui lui fourniront, par exemple pour décrire les forêts: les densités des boisements, la répartition des espèces, les types ou les volumes de productions, etc...
 
 ## Positionnement et géométrie
 Afin de représenter un phénomène sur une carte, il est nécessaire d'avoir sa position dans l'espace.
-Cette position peut être intégrée dans le fichier (GeoJSON) ou liée à un maillage existant (pays, département, commune, ...). Dans ce cas, il faudra préciser lors de l'import des données le type de maillage utilisé et l'attibut servant à coder le lien.
+Cette position peut être intégrée dans le fichier (GeoJSON) ou liée à un maillage existant (pays, département, commune, ...). Dans ce cas, il faudra préciser lors de l'import des données le type de maillage utilisé et l'attribut servant à coder le lien.
 Pour les départements, le lien se fait sur le numéro de département (01 = département de l'Ain), pour les communes il s'agit du code INSEE de la commune (01001 = commune de L'Abergement-Clémenciat), pour les pays, on utilise le code ISO (fr = France).
 
 Lorsqu'on n'a pas de coordonnées associées à une série de données, mais qu'on a des informations de localisation à l'adresse, à la commune ou au lieu-dit, on peut utiliser des outils de [géocodage](` + serviceURL.geocod + `) pour en déduire des coordonnées.
