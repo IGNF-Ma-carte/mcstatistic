@@ -20,7 +20,7 @@ import '../pages/onsave.css'
 
 const content = `
 <label class="ol-ext-check ol-ext-checkbox"><input class="data" type="checkbox" /><span></span> les données (GeoJSON) </label>
-<label class="ol-ext-check ol-ext-checkbox"><input class="style" type="checkbox" /><span></span> un fichier de style (SLD) </label>
+<label class="ol-ext-check ol-ext-checkbox" style="display:none"><input class="style" type="checkbox" /><span></span> un fichier de style (SLD) </label>
 <label class="ol-ext-check ol-ext-checkbox"><input class="carte" type="checkbox" /><span></span> la carte complète </label>
 `;
 
