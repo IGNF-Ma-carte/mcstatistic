@@ -12,23 +12,30 @@
 </div>
 <div data-stat="rayon">
     <p>
+        <label>Rayon de : </label><input type="number" value="3" min="1" data-stat="rmin"><span>
+        à
+        </span><input type="number" value="20" min="1" data-stat="rmax"> px
+    </p>
+    <p>
         <label class="ol-ext-check ol-ext-checkbox">
             <input type="checkbox">
-            Symbole proportionel<span></span>
+            <span></span>
+            Symbole proportionel
+        </label>
+    </p>
+    <div class="propOptions">
+        <p class="prop">
+            <label>Taille sur :</label>
             <select>
                 <option value="length">longueur</option>
                 <option value="area">surface</option>
             </select>
-        </label>
-    </p>
-    <p data-stat="col2">
-        <label>Codé sur :</label><select></select>
-    </p>
-    <p>
-        <label>Rayon de : </label><input type="number" value="3" min="1" data-stat="rmin"><span>
-            à
-        </span><input type="number" value="20" min="1" data-stat="rmax"> px
-    </p>
+        </p>
+        <p data-stat="col2">
+            <label>Codé sur :</label>
+            <select></select>
+        </p>
+    </div>
 </div>
 
 <div data-stat="alpha">
