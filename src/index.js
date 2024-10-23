@@ -11,7 +11,7 @@ import './tools/tools'
 import './menu/menu'
 import './menu/onglet'
 
-charte.setApp('mestat', 'Ma carte');
+charte.setApp('mestat', 'Ma carte', ['owner', 'editor']);
 
 /* DEBUG */
   window.charte = charte;
