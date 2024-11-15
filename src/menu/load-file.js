@@ -567,6 +567,7 @@ function displayAttributesForId(){
         header.forEach(attribute => {
             element.create('OPTION', {
                 parent: elt, 
+                value: attribute,
                 text: attribute,
             });
         });
