@@ -17,7 +17,11 @@ Ainsi si notre jeu de données a une valeur minimale de 2 et une valeur maximale
 Ce mode utilise une répartition équidistante mais sur une échelle logarithmique.
 ## Cluster ou k-moyenne
 Une répartition par cluster (ou k-moyenne) consiste à découper un jeu de données en parts, appelées clusters, de façon à minimiser une fonction de distance entre les individus. 
-**Remarque**:  Cette méthode de répartition ne garantit pas d'obtenir exactement le nombre de classes demandé par l'utilisateur, car ce nombre de classes est par construction lié à la répartition des valeurs de la variable à cartographier.
+**NB**:  Cette méthode de répartition ne garantit pas d'obtenir exactement le nombre de classes demandé par l'utilisateur, car ce nombre de classes est par construction lié à la répartition des valeurs de la variable à cartographier.
+## Head / tail
+Ce mode de discrétisation est particulèrement bien adapté à des données hiérarchisées, dont la distribution dissymétrique comprend typiquement beaucoup de petites valeurs et quelques valeurs élevées (population des communes, des revenus moyens, ou des loyers...).
+Il permet de simplifier drastiquement la représentation en neutralisant la première partie de la distribution, celle sous la moyenne (le tail). et de mieux dégager la hiérarchie des valeurs supérieures à la moyenne (head).
+**NB**:  Cette méthode de répartition ne garantit pas d'obtenir exactement le nombre de classes demandé par l'utilisateur.
 ## Manuelle
 Vous définissez vous-même les bornes des classes.
 `,
