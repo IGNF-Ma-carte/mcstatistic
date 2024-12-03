@@ -17,7 +17,14 @@ let strokeColor = '#3399CC';
 // })
 
 tab.querySelector('[data-stat="brewerColors"] div').appendChild(brewer.element);
-  
+
+// Rayon des symboles
+const rsymb = tab.querySelector('input[data-stat="rsymb"]')
+rsymb.addEventListener('change', (e) => {
+    if (parseFloat(e.target.value) < 1) e.target.value = 1;
+    calcStatistique({ rsymb: parseFloat(e.target.value) });
+});
+
 // rayon des points
 const rmin = tab.querySelector('input[data-stat="rmin"]')
 rmin.addEventListener('change', (e) => {

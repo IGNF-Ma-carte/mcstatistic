@@ -66,6 +66,7 @@ function displayStatOptions(typeMap){
         nbClass: tabDonnees.querySelector('[data-stat="nbClass"]'),
         col2: tabRepresentation.querySelector('[data-stat="col2"]'),
         symbol: tabRepresentation.querySelector('[data-stat="symbol"]'),
+        rsymb: tabRepresentation.querySelector('[data-stat="rsymb"]'),
         rmin: tabRepresentation.querySelector('[data-stat="rayon"]'),
         rmax: null, 
         stroke: tabRepresentation.querySelector('[data-stat="stroke"]'),
