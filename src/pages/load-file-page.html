@@ -16,9 +16,21 @@
     <p>
         Formats acceptés: texte tabulé (CSV, TXT, ...), 
         tableur (XLS, XLSX, ODS), 
-        ou GeoJSON
+        ou GeoJSON.
     </p>
-    
+    <div class="distant">
+        <h4>
+            Fichier à distance (url)
+        </h4>
+        <input type="url" id="upload-url-file">
+        <div class="buttons">
+            <button class="button button-ghost" data-action="send-url">Lire le fichier distant</button>
+        </div>
+    </div>
+    <p>
+        Un flux WFS peut aussi être indiqué en fichier distant par exemple.
+        Les format acceptés sont les mêmes.
+    </p>
     <div class="examples">
         <h2>
             Ou choisir un fichier d'exemple

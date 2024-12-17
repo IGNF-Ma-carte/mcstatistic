@@ -98,7 +98,6 @@ fileInput.addEventListener('change', () => {
             case 'xls':
             case 'xlsx': {
                 const workbook = read(result, { type: 'binary' });
-                console.log(workbook);
                 result = utils.sheet_to_csv(workbook.Sheets[workbook.SheetNames[0]]);
             }
             //@fallthrough
@@ -122,9 +121,59 @@ fileInput.addEventListener('change', () => {
         if (/^xlsx?$|^ods$/.test(extension)) {
             reader.readAsBinaryString(file);
         } else {
-            reader.readAsText(file);
+        reader.readAsText(file);
         }
     },200)
+})
+
+// Same for distant file
+const urlButton = loadFileElt.querySelector('button[data-action="send-url"]');
+const urlInput = loadFileElt.querySelector('input[type="url"]');
+urlButton.addEventListener('click', () => {
+    const isValid = urlInput.validity.valid;
+
+    if (!isValid) {
+        dialog.showAlert("L'url n'est pas valide");
+        return;
+    }
+
+    const url = urlInput.value;
+    urlInput.value = '';
+    loadFileElt.querySelector('[data-param="skipLines"]').value = 0;
+    papaOptions.skipLines = 0;
+
+    // Default open maillage
+    charte.accordionCheck(loadFileElt.querySelector('li.maillage'), true);
+
+    dialog.showWait('Chargement en cours...');
+    // Read file
+    try {
+        fetch(url)
+        .then(x => x.text())
+        .then(resp => {
+            // Create features
+            const features = (new ol_format_Guesser()).readFeatures(resp, {
+            featureProjection: carte.getMap().getView().getProjection()
+            })
+
+            if (!features) {
+                dialog.hide();
+                dialog.showAlert("Le fichier n'est pas un fichier JSON valide");
+                return;
+            }
+
+            showFeatures(features);
+            notification.show(features.length+' objet(s) chargé(s)...');
+            hideLoadFile();
+            dialog.hide();
+    })
+    } catch(e) {
+        dialog.hide();
+        dialog.showAlert("Une erreur est survenue");
+        console.log('error', e);
+        return;
+    }
+
 })
 
 /*

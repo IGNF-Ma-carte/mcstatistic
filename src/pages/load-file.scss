@@ -89,7 +89,17 @@
                 overflow: hidden;
                 cursor: pointer;
             }
-
+        }
+        #upload-url-file {
+            width: 100%;
+        }
+        .buttons {
+            width: 25%;
+            text-align: right;
+            margin: 0 -.5em;
+        }
+        .buttons button{
+            margin: .5em;
         }
 
     }
