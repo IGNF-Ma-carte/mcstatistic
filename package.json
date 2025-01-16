@@ -22,7 +22,7 @@
     "watcherGlob": "**"
   },
   "dependencies": {
-    "mcutils": "github:IGNF-Ma-carte/mcutils",
+    "mcutils": "git+https://github.com/IGNF-Ma-carte/mcutils.git#multi-select",
     "xlsx": "^0.18.5"
   },
   "repository": {
