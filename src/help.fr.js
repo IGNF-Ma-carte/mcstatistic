@@ -45,6 +45,11 @@ Pour les départements, le lien se fait sur le numéro de département (01 = dé
 
 Lorsqu'on n'a pas de coordonnées associées à une série de données, mais qu'on a des informations de localisation à l'adresse, à la commune ou au lieu-dit, on peut utiliser des outils de [géocodage](` + serviceURL.geocod + `) pour en déduire des coordonnées.
 `,
+distant_file: `# Statistique sur un fichier distant
+-----------
+Vous pouvez calculer une statistique sur un fichier distant.
+⚠️ Attention cependant, le fichier doit rester accessible et si les données sont mises à jour les statistiques risquent de mal se calculer ou être incohérentes avec ce que vous voulez montrer sur la carte.
+`,
 intro_maillage: `# Positionnement et géométrie
 -----------
 Afin de représenter un phénomène sur une carte, il est nécessaire d'avoir sa position dans l'espace.
