@@ -132,7 +132,6 @@ fileInput.addEventListener('change', () => {
 const urlButton = loadFileElt.querySelector('button[data-action="send-url"]');
 const urlInput = loadFileElt.querySelector('input[type="url"]');
 urlButton.addEventListener('click', () => {
-  console.log('load')
   const isValid = urlInput.validity.valid;
 
   if (!isValid) {
@@ -159,9 +158,8 @@ urlButton.addEventListener('click', () => {
           featureProjection: carte.getMap().getView().getProjection()
         })
 
-        if (!features) {
-          dialog.hide();
-          dialog.showAlert("Le fichier n'est pas un fichier JSON valide");
+        if (!features || !features.length) {
+          dialog.showAlert("Le fichier n'est pas un fichier valide<br/><i>(aucune donnée à importer)</i>.");
           return;
         }
 
@@ -173,11 +171,13 @@ urlButton.addEventListener('click', () => {
         notification.show(features.length + ' objet(s) chargé(s)...');
         hideLoadFile();
         dialog.hide();
+      }).catch(e => {
+        dialog.showAlert('Impossible de charger le fichiere<br/><i>'+ e.message + '</i>')
+        console.log([e])
       })
   } catch (e) {
     dialog.hide();
-    dialog.showAlert("Une erreur est survenue");
-    console.log('error', e);
+    dialog.showAlert('Une erreur est survenue<br/>'+ e.message);
     return;
   }
 
