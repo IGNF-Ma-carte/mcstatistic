@@ -112,6 +112,8 @@ fileInput.addEventListener('change', () => {
         break;
       }
       default: {
+        dialog.showAlert('Type de fichier non pris en compte.' 
+          + '<i>' + loadFileElt.querySelector('.upload label i').innerHTML.replace(/\n/g, '<br/>') + '</i>')
         return;
       }
     }
