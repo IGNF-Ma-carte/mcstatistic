@@ -7,12 +7,12 @@
         "title" : "Communes", 
         "id" : "code INSEE",
         "file" : "communes.geojsonx",
-        "date": "2024-01-01"
+        "date": "2025-01-01"
       }, { 
         "title" : "Communes (allégé)", 
         "id" : "code INSEE",
         "file" : "communes-light.geojsonx",
-        "date": "2024-01-01"
+        "date": "2025-01-01"
       }, {
         "title" : "Départements", 
         "id" : "numéro de département",
@@ -57,6 +57,22 @@
       }
     ]
   }, {
+    "title": "2024",
+    "path": "./data/geometry/2024/",
+    "files": [
+      {
+        "title" : "Communes 2024", 
+        "id" : "code INSEE",
+        "file" : "communes.geojsonx",
+        "date": "2024-01-01"
+      },{ 
+        "title" : "Communes 2024 (allégé)", 
+        "id" : "code INSEE",
+        "file" : "communes-light.geojsonx",
+        "date": "2024-01-01"
+      }
+    ]
+  },{
     "title": "2023",
     "path": "./data/geometry/2023/",
     "files": [
