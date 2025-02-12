@@ -146,7 +146,6 @@ function onsave(scarte) {
   dialog.showWait('Enregistrement en cours...');
   api.postMap(metadata, data, (response) => {
     if (!response.error) {
-      console.log('ok')
       /* TODO user XP */
       dialog.show({
         className: 'onsave',
