@@ -173,7 +173,8 @@ function onsave(scarte) {
 
 // Check validity
 function isValid(layer) {
-  if (layer.getStatistic().cols.length === 0) {
+  const stat = layer.getStatistic()
+  if (stat.cols.length === 0 && stat.typeMap !== 'heatmap') {
     // aucun attribut à afficher n'a été sélectionné
     if(document.body.dataset.menuTab !== 'statistic'){
       charte.showTab('statistic'); 
