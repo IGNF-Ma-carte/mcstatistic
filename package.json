@@ -1,6 +1,6 @@
 {
   "name": "mcstatistic",
-  "version": "4.4.5",
+  "version": "4.5.0",
   "description": "création des cartes statistiques",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,7 +22,8 @@
     "watcherGlob": "**"
   },
   "dependencies": {
-    "mcutils": "git+https://github.com/IGNF-Ma-carte/mcutils.git#ol10"
+    "mcutils": "git+https://github.com/IGNF-Ma-carte/mcutils.git",
+    "xlsx": "^0.18.5"
   },
   "repository": {
     "type": "git",
