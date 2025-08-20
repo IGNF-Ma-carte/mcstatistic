@@ -69,6 +69,8 @@ fileInput.addEventListener('change', () => {
   if (!file) {
     return;
   }
+
+  // LoadFile
   const extension = file.name.split('.').pop().toLowerCase();
   fileInput.value = '';
   loadFileElt.querySelector('[data-param="skipLines"]').value = 0;
@@ -104,6 +106,13 @@ fileInput.addEventListener('change', () => {
       }
       //@fallthrough
       case 'csv': {
+        const nbLines = result.match(/\n/g).length;
+        console.log(nbLines)
+        if (nbLines > 15000) {
+          loadFileElt.querySelector('[data-page="params"]').dataset.overload = ''
+        } else {
+          delete loadFileElt.querySelector('[data-page="params"]').dataset.overload
+        }
         showFileParams();
         csvPreview.setCSV(result);
         csvParsed = csvPreview.showData(papaOptions);
@@ -119,15 +128,36 @@ fileInput.addEventListener('change', () => {
     }
   }
 
-  dialog.showWait('Chargement en cours...')
-  setTimeout(() => {
-    // Start loading
-    if (/^xlsx?$|^ods$/.test(extension)) {
-      reader.readAsBinaryString(file);
-    } else {
-      reader.readAsText(file);
-    }
-  }, 200)
+  function readFile() {
+    dialog.showWait('Chargement en cours...')
+    setTimeout(() => {
+      // Start loading
+      if (/^xlsx?$|^ods$/.test(extension)) {
+        reader.readAsBinaryString(file);
+      } else {
+        reader.readAsText(file);
+      }
+    }, 200)
+  }
+
+  // Check size before read (30 mo)
+  if (file.size / 1024 / 1024 > 30) {
+    dialog.showAlert(`
+      Attention le fichier sélectionné semble volumineux. 
+      <br>/
+      L'import de fichier volumineux et/ou complexe peut échouer ou provoquer des ralentissements de navigateur. 
+      <br/>
+      Nous vous recommandons d'utiliser un hébergement externe.
+    `, { ok: 'Continuer', cancel: 'Annuler' }, 
+    b => {
+      if (b==='ok') {
+        readFile()
+      }
+    })
+  } else {
+    readFile()
+  }
+
 })
 
 // Load a distant file

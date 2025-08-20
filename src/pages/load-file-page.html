@@ -19,6 +19,11 @@
           tableur (XLS, XLSX, ODS),
           ou GeoJSON.
         </i>
+        <br/>
+        <i>
+          Attention : l'import de fichier volumineux et/ou complexe peut échouer 
+          ou provoquer des ralentissements de navigateur.
+        </i>
       </label>
     </div>
     <div class="distant">
@@ -94,6 +99,9 @@
         </div>
         <label>Données définies sur :</label>
         <select data-param="granularity"></select>
+        <p class="warning">Attention, votre fichier contient un grand nombre de lignes, 
+          utilisez plutôt la version allégée du maillage pour une meilleure fluidité de la carte.
+        </p>
         <div class="lonlat">
           <label>longitude : </label><select data-param="attr-lon"></select>
           <br />

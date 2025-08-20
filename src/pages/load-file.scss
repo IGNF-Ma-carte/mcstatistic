@@ -9,6 +9,22 @@
   padding-top: 2rem;
   overflow-y: auto;
 
+  .warning {
+    color: #666;
+    font-style: italic;
+    display: none;
+  }
+  [data-overload] .warning {
+    display: block;
+  }
+  .warning:before {
+    content: "\f071";
+    font-family: FontAwesome;
+    color: orange;
+    font-style: normal;
+    margin-right: 0.5em;
+  }
+
   .close {
     display: inline;
     position: absolute;
