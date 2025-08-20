@@ -7,4 +7,4 @@ services:
     container_name: macarte_statistique
     restart: always
     ports: 
-      - 8087:8080
+      - 8080:8080
