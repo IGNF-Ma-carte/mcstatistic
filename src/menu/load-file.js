@@ -107,7 +107,6 @@ fileInput.addEventListener('change', () => {
       //@fallthrough
       case 'csv': {
         const nbLines = result.match(/\n/g).length;
-        console.log(nbLines)
         if (nbLines > 15000) {
           loadFileElt.querySelector('[data-page="params"]').dataset.overload = ''
         } else {
@@ -140,15 +139,15 @@ fileInput.addEventListener('change', () => {
     }, 200)
   }
 
-  // Check size before read (30 mo)
+  // Check size before read (30 Mo)
   if (file.size / 1024 / 1024 > 30) {
     dialog.showAlert(`
       Attention le fichier sélectionné semble volumineux. 
-      <br>/
+      <br>
       L'import de fichier volumineux et/ou complexe peut échouer ou provoquer des ralentissements de navigateur. 
       <br/>
       Nous vous recommandons d'utiliser un hébergement externe.
-    `, { ok: 'Continuer', cancel: 'Annuler' }, 
+    `, { ok: 'Continuer...', cancel: 'Annuler' }, 
     b => {
       if (b==='ok') {
         readFile()
