@@ -89,7 +89,7 @@ fileInput.addEventListener('change', () => {
       case 'geojson': {
         const data = validateJSON(result);
         if (!data) {
-          dialog.showAlert("Le fichier n'est pas un fichier JSON valide");
+          setTimeout(() => dialog.showAlert("Le fichier n'est pas un fichier JSON valide"));
           return;
         }
         loadDataInMap(data);
@@ -120,8 +120,9 @@ fileInput.addEventListener('change', () => {
         break;
       }
       default: {
-        dialog.showAlert('Type de fichier non pris en compte.' 
+        setTimeout(() => dialog.showAlert('Type de fichier non pris en compte.' 
           + '<i>' + loadFileElt.querySelector('.upload label i').innerHTML.replace(/\n/g, '<br/>') + '</i>')
+        );
         return;
       }
     }
@@ -190,7 +191,7 @@ urlButton.addEventListener('click', () => {
         })
 
         if (!features || !features.length) {
-          dialog.showAlert("Le fichier n'est pas un fichier valide<br/><i>(aucune donnée à importer)</i>.");
+          setTimeout(() => dialog.showAlert("Le fichier n'est pas un fichier valide<br/><i>(aucune donnée à importer)</i>."));
           return;
         }
 
@@ -203,12 +204,12 @@ urlButton.addEventListener('click', () => {
         hideLoadFile();
         dialog.hide();
       }).catch(e => {
-        dialog.showAlert('Impossible de charger le fichiere<br/><i>'+ e.message + '</i>')
+        setTimeout(() => dialog.showAlert('Impossible de charger le fichiere<br/><i>'+ e.message + '</i>'));
         console.log([e])
       })
   } catch (e) {
     dialog.hide();
-    dialog.showAlert('Une erreur est survenue<br/>'+ e.message);
+    setTimeout(() => dialog.showAlert('Une erreur est survenue<br/>'+ e.message));
     return;
   }
 
@@ -476,7 +477,7 @@ loadFileElt.querySelectorAll('[data-page="params"] button').forEach((button) => 
           if (features.length === csvParsed.data.length) {
             notification.show(features.length + ' objets chargés')
           } else {
-            dialog.show({
+            setTimeout(() => dialog.show({
               title: 'Erreur au chargement',
               content: ['<b>',
                 features.length,
@@ -486,7 +487,7 @@ loadFileElt.querySelectorAll('[data-page="params"] button').forEach((button) => 
               ].join(' '),
               className: 'alert load',
               buttons: ['ok']
-            })
+            }));
           }
           showFeatures(features);
           hideLoadFile();
@@ -518,46 +519,48 @@ loadFileElt.querySelectorAll('[data-page="params"] button').forEach((button) => 
             } else {
               let granu = granularitySelector.value.split('/').pop().split('.').shift();
               if (granu === 'custom') granu = customFile.name;
-              dialog.show({
-                title: 'Erreur au chargement',
-                content: ['<b>',
-                  features.length,
-                  '</b> objets chargés sur <b>',
-                  csvParsed.data.length,
-                  '</b><br/>',
-                  'Certaines lignes du fichier n\'ont pas trouvées de correspondance sur le maillage indiqué...<br/>',
-                  'Vérifiez que l\'attribut codant (<i>' + attrId + '</i>)',
-                  'correspond bien au maillage choisi',
-                  '(<i>' + granu + '</i>)...'
-                ].join(' '),
-                className: 'alert load',
-                buttons: { more: 'plus d\'info...', ok: 'ok' },
-                onButton: b => {
-                  if (b === 'more') {
-                    // Show errors in a dialog
-                    const ul = element.create('TABLE')
-                    const cols = Object.keys(join.error[0].data);
-                    const th = element.create('TR', { parent: ul });
-                    element.create('TH', { text: 'erreur', parent: th })
-                    cols.forEach(c => {
-                      element.create('TH', { text: c, title: c, parent: th })
-                    })
-                    join.error.forEach(e => {
-                      const tr = element.create('TR', { parent: ul });
-                      element.create('TD', { text: errorStr[e.error], parent: tr })
+              setTimeout(() =>
+                dialog.show({
+                  title: 'Erreur au chargement',
+                  content: ['<b>',
+                    features.length,
+                    '</b> objets chargés sur <b>',
+                    csvParsed.data.length,
+                    '</b><br/>',
+                    'Certaines lignes du fichier n\'ont pas trouvées de correspondance sur le maillage indiqué...<br/>',
+                    'Vérifiez que l\'attribut codant (<i>' + attrId + '</i>)',
+                    'correspond bien au maillage choisi',
+                    '(<i>' + granu + '</i>)...'
+                  ].join(' '),
+                  className: 'alert load',
+                  buttons: { more: 'plus d\'info...', ok: 'ok' },
+                  onButton: b => {
+                    if (b === 'more') {
+                      // Show errors in a dialog
+                      const ul = element.create('TABLE')
+                      const cols = Object.keys(join.error[0].data);
+                      const th = element.create('TR', { parent: ul });
+                      element.create('TH', { text: 'erreur', parent: th })
                       cols.forEach(c => {
-                        element.create('TD', { text: e.data[c] || '', className: typeof (e.data[c]), parent: tr })
+                        element.create('TH', { text: c, title: c, parent: th })
                       })
-                    })
-                    dialog.show({
-                      title: granu + ' en erreur',
-                      content: ul,
-                      className: 'alert loadError',
-                      buttons: { ok: 'ok' },
-                    })
+                      join.error.forEach(e => {
+                        const tr = element.create('TR', { parent: ul });
+                        element.create('TD', { text: errorStr[e.error], parent: tr })
+                        cols.forEach(c => {
+                          element.create('TD', { text: e.data[c] || '', className: typeof (e.data[c]), parent: tr })
+                        })
+                      })
+                      dialog.show({
+                        title: granu + ' en erreur',
+                        content: ul,
+                        className: 'alert loadError',
+                        buttons: { ok: 'ok' },
+                      })
+                    }
                   }
-                }
-              })
+                })
+              )
             }
             showFeatures(features);
             hideLoadFile();
@@ -742,7 +745,7 @@ function loadDataInMap(data) {
     hideLoadFile();
     notification.show(features.length + ' objet(s) chargé(s)...');
   } catch (e) {
-    dialog.showAlert("Une erreur est survenue lors du chargement du fichier");
+    setTimeout(() => dialog.showAlert("Une erreur est survenue lors du chargement du fichier"));
     console.log('error', e);
   }
 }
