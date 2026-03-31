@@ -57,6 +57,32 @@
       }
     ]
   }, {
+    "title": "2025",
+    "path": "./data/geometry/2025/",
+    "files": [
+      {
+        "title" : "Communes 2025", 
+        "id" : "code INSEE",
+        "file" : "communes.geojsonx",
+        "date": "2025-01-01"
+      },{ 
+        "title" : "Communes 2025 (allégé)", 
+        "id" : "code INSEE",
+        "file" : "communes-light.geojsonx",
+        "date": "2025-01-01"
+      },{ 
+        "title" : "EPCI", 
+        "id" : "code EPCI",
+        "file" : "epci.geojsonx", 
+        "date": "2025-01-01"
+      },{ 
+        "title" : "EPCI (allégé)", 
+        "id" : "code EPCI",
+        "file" : "epci-light.geojsonx", 
+        "date": "2025-01-01"
+      }
+    ]
+  },{
     "title": "2024",
     "path": "./data/geometry/2024/",
     "files": [
